@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Ramanujan Hostel | NSIT</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-social.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "font-awesome.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static "mystyle.css" %}" />
+
+</head>
+<body>
+	<div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <h1>Ramanujan Hostel</h1>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <p style="padding:20px;"></p>
+                        <img src="{% static "images/hostel.jpg" %}" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+    </div>
+
+	<div class="container" style="padding:10px">
+		<div class="col-xs-12 col-sm-12">
+		{% if valid_id %}
+        <form action="/end/" method = "POST" id="form" class="form-horizontal">
+            {% csrf_token %}
+		<h3 align="center">Student Information</h3>
+                <div class="form-group">
+                    <label for="roll_no" class="col-sm-4 control-label">Roll Number</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="roll_no" name="roll_no" value={{roll_no}} readonly>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="name" name="name" value="{{name}}" readonly>
+                    </div>
+                </div>
+			<div class="form-group">
+                    <label for="user_id" class="col-sm-4 control-label">Email ID</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="user_id" name="user_id" value={{user_id}} readonly>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="dept" class="col-sm-4 control-label">Department</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="dept" name="dept" value={{dept}} readonly>
+                    </div>
+                </div>
+			<div class="form-group">
+                    <label for="lg_name" class="col-sm-4 control-label">Local Guardian Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="lg_name" name="lg_name">
+                    </div>
+                </div>
+		<h3 align="center">Contact Information</h3>
+			<div class="form-group">
+                    <label for="contact_num" class="col-sm-4 control-label">Contact Number</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="contact_num" name="contact_num" maxlength="10" required>
+                    </div>
+                </div>
+
+			<div class="form-group">
+                    <label for="lg_contactnum" class="col-sm-4 control-label">Local Guardian Contact Number</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="lg_contactnum" name="lg_contactnum" maxlength="10" required>
+                    </div>
+                </div>
+			<div class="form-group">
+                    <label for="lg_add" class="col-sm-4 control-label">Local Guardian Address</label>
+                    <div class="col-sm-4">
+						<textarea rows="10" cols="30" class="form-control" id="lg_add" name="lg_add" required></textarea>
+                    </div>
+                </div>
+		<h3 align="center">Hostel Information</h3>
+		<div class="form-group">
+                    <label for="h_name" class="col-sm-4 control-label">Hostel Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="h_name" name="h_name" value={{h_name}} readonly>
+                    </div>
+                </div>
+		<div class="form-group">
+                    <label for="room_num" class="col-sm-4 control-label">Room Number to allot in Hostel</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="room_num" name="room_num" value={{room_num}} required>
+                    </div>
+                </div>
+		<h3 align="center">Other Information</h3>
+		<div class="form-group">
+                    <label for="receipt" class="col-sm-4 control-label">Mess Fee Receipt Number</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="receipt" name="receipt" required>
+                    </div>
+                </div>
+		<div class="form-group">
+                    <label for="bank" class="col-sm-4 control-label">Bank Account Number</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="bank" name="bank" required>
+                    </div>
+                </div>
+			<div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-2">
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                    </div>
+			</div>
+        </form>
+			{% else %}
+			<h3 align="center"> {{ message }} </h3>
+			<br>
+			<div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-2">
+                        <a href="/login/" class="btn btn-danger"> Back to Student Login </a>
+                    </div>
+			</div>
+		{% endif %}
+    </div>
+    </div>
+
+	<footer class="row-footer">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/home">Home</a></li>
+                        <li><a target="_blank" href="http://ramanujan-hostel.com/">About</a></li>
+                        <li><a target="_blank" href="http://ramanujan-hostel.com/contact-us/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+		              Boys Hostel - 4<br>
+		              Netaji Subhas Institute of Technology<br>
+		              Dwarka Sector-3, Delhi-78<br>
+		              <i class="fa fa-phone"></i>: 011-25000085<br>
+		              <i class="fa fa-fax"></i>: +XXXX- XXXXXX<br>
+		              <i class="fa fa-envelope"></i>: <a href="mailto:sps_nsit@yahoo.co.uk">ramanujan_warden@nsit.net.in</a>
+		           </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="navbar navbar-nav"style="padding: 40px 10px;">
+                        <a target="_blank" href="http://google.com/+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+                        <a target="_blank" href="http://www.facebook.com/profile.php?id=" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                        <a target="_blank" href="http://www.linkedin.com/in/" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a target="_blank" href="http://twitter.com/" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                        <a target="_blank" href="http://youtube.com/" class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
+                        <a target="_blank" href="mailto:" class="btn btn-social-icon"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align="center">© Copyright 2018 N.S.I.T.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
